@@ -20,6 +20,23 @@ export function REPLInput(props: REPLInputProps) {
   // TODO: Once it increments, try to make it push commands... Note that you can use the `...` spread syntax to copy what was there before
   // add to it with new commands.
 
+  function handleSubmit (commandString:string) {
+    //check for mode function, get response
+    //check for load function, get response
+    //check for view function, get response
+    //check for search function, get response
+    //if none of the above functions, get failure response
+    const response = "Not a recognized function. Try again!"
+    if (isVerbose) {
+      props.addToHistory("------")
+      props.addToHistory("Command: " + commandString)
+      props.addToHistory("Output: " + response)
+    }
+    props.addToHistory("------")
+    props.addToHistory(response)
+
+  }
+
   /**
    * We suggest breaking down this component into smaller components, think about the individual pieces
    * of the REPL and how they connect to each other...
@@ -43,7 +60,8 @@ export function REPLInput(props: REPLInputProps) {
       <button
         onClick={() => {
           setCount((prev) => prev + 1);
-          props.addToHistory(commandString);
+          handleSubmit(commandString)
+          //props.addToHistory(commandString);
         }}
       >
         Clicked {count} times!
