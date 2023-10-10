@@ -21,18 +21,25 @@ export function REPLInput(props: REPLInputProps) {
   // add to it with new commands.
 
   function handleSubmit (commandString:string) {
+    let divider = "------"
+    let response = "Not a recognized function. Try again!"
     //check for mode function, get response
+    //is there a better way to check than just ==?
+    if (commandString === "mode") {
+      if (isVerbose) {setVerbose(true)}
+      else {setVerbose(false)}
+      response = "Changed mode!"
+    }
     //check for load function, get response
     //check for view function, get response
     //check for search function, get response
     //if none of the above functions, get failure response
-    const response = "Not a recognized function. Try again!"
     if (isVerbose) {
-      props.addToHistory("------")
+      props.addToHistory(divider)
       props.addToHistory("Command: " + commandString)
       props.addToHistory("Output: " + response)
     }
-    props.addToHistory("------")
+    props.addToHistory(divider)
     props.addToHistory(response)
 
   }
