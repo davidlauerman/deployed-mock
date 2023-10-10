@@ -26,7 +26,7 @@ export function REPLInput(props: REPLInputProps) {
     //check for mode function, get response
     //is there a better way to check than just ==?
     if (commandString === "mode") {
-      if (isVerbose) {setVerbose(true)}
+      if (!isVerbose) {setVerbose(true)}
       else {setVerbose(false)}
       response = "Changed mode!"
     }
