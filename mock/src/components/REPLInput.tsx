@@ -1,10 +1,11 @@
 import "../styles/main.css";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ControlledInput } from "./ControlledInput";
+import { Line } from "./Line";
 
 interface REPLInputProps {
   // TODO: Fill this with desired props... Maybe something to keep track of the submitted commands
-  addToHistory: (command: string) => void;
+  addToHistory: (newHistory: []) => void;
 }
 // You can use a custom interface or explicit fields or both! An alternative to the current function header might be:
 // REPLInput(history: string[], setHistory: Dispatch<SetStateAction<string[]>>)
@@ -26,21 +27,26 @@ export function REPLInput(props: REPLInputProps) {
     //check for mode function, get response
     //is there a better way to check than just ==?
     if (commandString === "mode") {
-      if (!isVerbose) {setVerbose(true)}
-      else {setVerbose(false)}
+      setVerbose(!isVerbose)
       response = "Changed mode!"
     }
     //check for load function, get response
     //check for view function, get response
     //check for search function, get response
     //if none of the above functions, get failure response
+    //maybe this should be in 
+  
+    const newHistory = []
+    newHistory.push(<Line text={divider}></Line>)
     if (isVerbose) {
-      props.addToHistory(divider)
-      props.addToHistory("Command: " + commandString)
-      props.addToHistory("Output: " + response)
+      //we can change these to line types
+      newHistory.push(<Line text={"Command: " + commandString}></Line>)
+      newHistory.push(<Line text={"Output: " + response}></Line>)
+    } else {
+      //check if tabl
+      newHistory.push(<Line text={response}></Line>)
     }
-    props.addToHistory(divider)
-    props.addToHistory(response)
+    props.addToHistory(newHistory)
 
   }
 
