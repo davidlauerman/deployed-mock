@@ -50,22 +50,11 @@ export { getIntegers, getStrings, getRandomArray };
 
 // export function DataLoader({ filePath }) {
 //   const [data, setData] = useState(null);
-
 //   useEffect(() => {
 //     const loadData = async () => {
-//       try {
-//         const response = await fetch(filePath); // Load the JSON data using the provided file path
-//         if (response.ok) {
-//           const jsonData = await response.json();
-//           setData(jsonData); // Set the data based on the loaded JSON
-//         } else {
-//           throw new Error("Failed to fetch data");
-//         }
-//       } catch (error) {
-//         console.error("Error loading data:", error);
-//       }
+//         //setData(map.filePath)
+//
 //     };
-
 //     loadData();
 //   }, [filePath]);
 
@@ -73,7 +62,7 @@ export { getIntegers, getStrings, getRandomArray };
 //     return (
 //       <div>
 //         <h2>Data Loaded from {filePath}</h2>
-//         <pre>{JSON.stringify(data, null, 2)}</pre>
+//         <pre>{data}</pre>
 //       </div>
 //     );
 //   } else {
