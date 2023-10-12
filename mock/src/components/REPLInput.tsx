@@ -19,7 +19,7 @@ export function REPLInput(props: REPLInputProps) {
   const [isVerbose, setVerbose] = useState<boolean>(false);
   //manages the shared filepath between load/search/view
   //we choose filepath because we would still be making calls to the API to view
-  const [filepath, setFilepath] = useState<string>();
+  const [filepath, setFilepath] = useState<string>("");
 
   // TODO WITH TA: build a handleSubmit function called in button onClick
   // TODO: Once it increments, try to make it push commands... Note that you can use the `...` spread syntax to copy what was there before
