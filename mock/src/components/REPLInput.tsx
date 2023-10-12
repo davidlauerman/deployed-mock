@@ -28,13 +28,13 @@ export function REPLInput(props: REPLInputProps) {
 
   function handleSubmit (commandString:string) {
     let divider = "------"
-    let response = "Not a recognized function. Try again!"
+    let response = <Line text="Not a recognized function. Try again!"></Line>
     const argArray = responseParser(commandString)
     //check for mode function, get response
     //is there a better way to check than just ==?
     if (commandString === "mode") {
       setVerbose(!isVerbose)
-      response = "Changed mode!"
+      response = <Line text="Changed mode!"></Line>
     }
     //check for load function, get response
     if (argArray[0] === "load_csv") {
@@ -48,13 +48,10 @@ export function REPLInput(props: REPLInputProps) {
     const newHistory = []
     newHistory.push(<Line text={divider}></Line>)
     if (isVerbose) {
-      //we can change these to line types
+      //we need to add these lines for every Verbose output
       newHistory.push(<Line text={"Command: " + commandString}></Line>)
-      newHistory.push(<Line text={"Output: " + response}></Line>)
-    } else {
-      //check if tabl
-      newHistory.push(<Line text={response}></Line>)
-    }
+      newHistory.push(<Line text={"Output: "}></Line>)
+    } 
     newHistory.push(response)
     props.addToHistory(newHistory)
 
