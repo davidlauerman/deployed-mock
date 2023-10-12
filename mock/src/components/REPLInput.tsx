@@ -2,6 +2,7 @@ import "../styles/main.css";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ControlledInput } from "./ControlledInput";
 import { Line } from "./Line";
+import { Load_CSV } from "./load";
 
 interface REPLInputProps {
   // TODO: Fill this with desired props... Maybe something to keep track of the submitted commands
@@ -15,22 +16,30 @@ export function REPLInput(props: REPLInputProps) {
   const [commandString, setCommandString] = useState<string>("");
   // TODO WITH TA : add a count state
   const [count, setCount] = useState<number>(0);
-
+  // manages whether responsed are verbose / brief
   const [isVerbose, setVerbose] = useState<boolean>(false);
+  //manages the shared filepath between load/search/view
+  //we choose filepath because we would still be making calls to the API to view
+  const [filepath, setFilepath] = useState<string>("");
+
   // TODO WITH TA: build a handleSubmit function called in button onClick
   // TODO: Once it increments, try to make it push commands... Note that you can use the `...` spread syntax to copy what was there before
   // add to it with new commands.
 
   function handleSubmit (commandString:string) {
     let divider = "------"
-    let response = "Not a recognized function. Try again!"
+    let response = <Line text="Not a recognized function. Try again!"></Line>
+    const argArray = responseParser(commandString)
     //check for mode function, get response
     //is there a better way to check than just ==?
     if (commandString === "mode") {
       setVerbose(!isVerbose)
-      response = "Changed mode!"
+      response = <Line text="Changed mode!"></Line>
     }
     //check for load function, get response
+    if (argArray[0] === "load_csv") {
+      response = <Load_CSV newFilepath={argArray[1]} setFilepath={setFilepath}/>
+    }
     //check for view function, get response
     //check for search function, get response
     //if none of the above functions, get failure response
@@ -39,15 +48,18 @@ export function REPLInput(props: REPLInputProps) {
     const newHistory = []
     newHistory.push(<Line text={divider}></Line>)
     if (isVerbose) {
-      //we can change these to line types
+      //we need to add these lines for every Verbose output
       newHistory.push(<Line text={"Command: " + commandString}></Line>)
-      newHistory.push(<Line text={"Output: " + response}></Line>)
-    } else {
-      //check if tabl
-      newHistory.push(<Line text={response}></Line>)
-    }
+      newHistory.push(<Line text={"Output: "}></Line>)
+    } 
+    newHistory.push(response)
     props.addToHistory(newHistory)
 
+  }
+
+  function responseParser (commandString: string) {
+    const returnArray = commandString.split(" ")
+    return returnArray
   }
 
   /**
