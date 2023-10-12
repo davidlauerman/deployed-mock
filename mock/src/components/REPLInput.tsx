@@ -15,8 +15,12 @@ export function REPLInput(props: REPLInputProps) {
   const [commandString, setCommandString] = useState<string>("");
   // TODO WITH TA : add a count state
   const [count, setCount] = useState<number>(0);
-
+  // manages whether responsed are verbose / brief
   const [isVerbose, setVerbose] = useState<boolean>(false);
+  //manages the shared filepath between load/search/view
+  //we choose filepath because we would still be making calls to the API to view
+  const [filepath, setFilepath] = useState<string>();
+
   // TODO WITH TA: build a handleSubmit function called in button onClick
   // TODO: Once it increments, try to make it push commands... Note that you can use the `...` spread syntax to copy what was there before
   // add to it with new commands.
