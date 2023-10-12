@@ -2,6 +2,7 @@ import "../styles/main.css";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ControlledInput } from "./ControlledInput";
 import { Line } from "./Line";
+import { Load_CSV } from "./load";
 
 interface REPLInputProps {
   // TODO: Fill this with desired props... Maybe something to keep track of the submitted commands
@@ -28,6 +29,7 @@ export function REPLInput(props: REPLInputProps) {
   function handleSubmit (commandString:string) {
     let divider = "------"
     let response = "Not a recognized function. Try again!"
+    const argArray = responseParser(commandString)
     //check for mode function, get response
     //is there a better way to check than just ==?
     if (commandString === "mode") {
@@ -35,6 +37,9 @@ export function REPLInput(props: REPLInputProps) {
       response = "Changed mode!"
     }
     //check for load function, get response
+    if (argArray[0] === "load_csv") {
+      response = <Load_CSV newFilepath={argArray[1]} setFilepath={setFilepath}/>
+    }
     //check for view function, get response
     //check for search function, get response
     //if none of the above functions, get failure response
@@ -50,8 +55,14 @@ export function REPLInput(props: REPLInputProps) {
       //check if tabl
       newHistory.push(<Line text={response}></Line>)
     }
+    newHistory.push(response)
     props.addToHistory(newHistory)
 
+  }
+
+  function responseParser (commandString: string) {
+    const returnArray = commandString.split(" ")
+    return returnArray
   }
 
   /**
