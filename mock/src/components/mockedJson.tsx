@@ -1,7 +1,7 @@
 import "../styles/main.css";
 import { useState } from "react";
 
-export function getData(file: string, load: Boolean): string[][] {
+export function getData(file: string): string[][] {
   // this happens in load, stores the new loaded file and returns it
   // if (load) {
   //   if (file === "fileInt" || file === "fileTxt" || file === "fileRnd") {
