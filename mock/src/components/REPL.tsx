@@ -14,10 +14,11 @@ import { REPLInput } from './REPLInput';
 
 export default function REPL() {
   // TODO: Add some kind of shared state that holds all the commands submitted.
-  const [history, setHistory] = useState<String[]>([]);
+  const [history, setHistory] = useState<[]>([]);
 
-  const addToHistory = (command: string) => {
-    setHistory([...history, command])
+  //elements: array
+  const addToHistory = (newHistory: []) => {
+    setHistory([...history, ...newHistory])
   };
 
   return (
