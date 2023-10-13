@@ -2,24 +2,21 @@ import "../styles/main.css";
 import { useState } from "react";
 
 export function getData(file: string, load: Boolean): string[][] {
-  const [currFile, setCurrFile] = useState<string>("");
-
   // this happens in load, stores the new loaded file and returns it
-  if (load) {
-    if (file === "fileInt" || file === "fileTxt" || file === "fileRnd") {
-      setCurrFile(file);
-      return [[file]];
-    } else {
-      return [["Wrong"]];
-    }
-  }
+  // if (load) {
+  //   if (file === "fileInt" || file === "fileTxt" || file === "fileRnd") {
+  //     return [[file]];
+  //   } else {
+  //     return [["Wrong"]];
+  //   }
+  // }
 
   // if the file is already loaded, we are returning it
-  if (currFile === "fileInt") {
+  if (file === "fileInt") {
     return Files.INT;
-  } else if (currFile === "fileTxt") {
+  } else if (file === "fileTxt") {
     return Files.TXT;
-  } else if (currFile === "fileRnd") {
+  } else if (file === "fileRnd") {
     return Files.RND;
   } else {
     // If input doesn't match any of the predetermined strings
@@ -109,4 +106,37 @@ function getRandomArray(rows: number, cols: number): string[][] {
 //   } else {
 //     return <div> Wrong </div>;
 //   }
+// }
+
+// export function getData(file: string, load: Boolean): string[][] {
+//   // Define your predetermined 2D arrays
+//   const array1 = [
+//     ["Item 1", "Item 2", "Item 3"],
+//     ["Item 4", "Item 5", "Item 6"],
+//   ];
+
+//   const array2 = [
+//     ["A", "B", "C"],
+//     ["D", "E", "F"],
+//   ];
+
+//   const array3 = [
+//     ["One", "Two"],
+//     ["Three", "Four"],
+//   ];
+
+//   let selectedArray: string[][];
+
+//   // Use conditional logic to select the array based on the input string
+//   if (file === "string1") {
+//     selectedArray = array1;
+//   } else if (file === "string2") {
+//     selectedArray = array2;
+//   } else if (file === "string3") {
+//     selectedArray = array3;
+//   } else {
+//     selectedArray = [["Wrong"]]; // Default to an empty array if the input doesn't match any predetermined string
+//   }
+
+//   return selectedArray;
 // }
