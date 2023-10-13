@@ -1,18 +1,13 @@
-import { Dispatch, SetStateAction } from "react";
-import { Line } from "./Line";
+import { Table } from "./Table";
+import { getData } from "./mockedJson";
 
 interface searchProps {
+  file: string;
   target: string;
   column: string;
 }
 
-export function Search_CSV({ target, column }: searchProps) {
-  let response = "Filepath could not be found!";
-  //we need to check if we can load the data!
-  //if (load_data !== false) {
-  //setFilepath(newFilepath)
-  //response = "File" + {filepath} + " loaded!"
-  //}
-
-  return <Line text={response}></Line>;
+export function Search_CSV({ file, target, column }: searchProps) {
+  // return whatever file you like
+  return <Table array={[getData(file, false)[0]]} headers={false}></Table>;
 }

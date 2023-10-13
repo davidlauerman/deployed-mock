@@ -4,6 +4,7 @@ import { ControlledInput } from "./ControlledInput";
 import { Line } from "./Line";
 import { Load_CSV } from "./load";
 import { Table } from "./Table";
+import { Search_CSV } from "./search";
 
 interface REPLInputProps {
   // TODO: Fill this with desired props... Maybe something to keep track of the submitted commands
@@ -27,39 +28,45 @@ export function REPLInput(props: REPLInputProps) {
   // TODO: Once it increments, try to make it push commands... Note that you can use the `...` spread syntax to copy what was there before
   // add to it with new commands.
 
-  function handleSubmit (commandString:string) {
-    let divider = "------"
-    let response = <Line text="Not a recognized function. Try again!"></Line>
-    const argArray = responseParser(commandString)
+  function handleSubmit(commandString: string) {
+    let divider = "------";
+    let response = <Line text="Not a recognized function. Try again!"></Line>;
+    const argArray = responseParser(commandString);
     //check for mode function, get response
     //is there a better way to check than just ==?
     if (commandString === "mode") {
-      setVerbose(!isVerbose)
-      response = <Line text="Changed mode!"></Line>
+      setVerbose(!isVerbose);
+      response = <Line text="Changed mode!"></Line>;
     }
     //check for load function, get response
-    if (argArray[0] === "load_csv") {
-      response = <Load_CSV newFilepath={argArray[1]} setFilepath={setFilepath}/>
+    if (argArray[0] === "load") {
+      response = (
+        <Load_CSV newFilepath={argArray[1]} setFilepath={setFilepath} />
+      );
     }
     //check for view function, get response
     //check for search function, get response
+    if (argArray[0] === "search") {
+      response = (
+        <Search_CSV file={filepath} target={argArray[1]} column={argArray[2]} />
+      );
+    }
     //if none of the above functions, get failure response
-    //maybe this should be in 
-  
-    const newHistory = []
-    newHistory.push(<Line text={divider}></Line>)
+    //maybe this should be in
+
+    const newHistory = [];
+    newHistory.push(<Line text={divider}></Line>);
     if (isVerbose) {
       //we need to add these lines for every Verbose output
-      newHistory.push(<Line text={"Command: " + commandString}></Line>)
-      newHistory.push(<Line text={"Output: "}></Line>)
-    } 
-    newHistory.push(response)
-    props.addToHistory(newHistory)
-
+      newHistory.push(<Line text={"Command: " + commandString}></Line>);
+      newHistory.push(<Line text={"Output: "}></Line>);
+    }
+    newHistory.push(response);
+    props.addToHistory(newHistory);
   }
 
-  function responseParser (commandString: string) {
-    const returnArray = commandString.split(" ")
+  function responseParser(commandString: string) {
+    const returnArray = commandString.split(" ");
     return returnArray;
   }
 
@@ -86,7 +93,7 @@ export function REPLInput(props: REPLInputProps) {
       <button
         onClick={() => {
           setCount((prev) => prev + 1);
-          handleSubmit(commandString)
+          handleSubmit(commandString);
           //props.addToHistory(commandString);
         }}
       >
