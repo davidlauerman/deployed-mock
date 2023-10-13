@@ -7,7 +7,11 @@ interface loadProps {
   //not sure if you have to do this for things that are shared state
   setFilepath: Dispatch<SetStateAction<string>>;
 }
-
+/**
+ * loads the CSV
+ * @param param0 - takes in the filepath and a setter
+ * @returns a line object with the file load confirmation/failure
+ */
 export function Load_CSV({ newFilepath, setFilepath }: loadProps) {
   let response = "Filepath could not be found!";
   //we need to check if we can load the data!
