@@ -1,8 +1,13 @@
 import { Table } from "./Table";
 import { getData } from "./mockedJson";
 
-export function View_CSV() {
-  // return whatever file you like
+interface viewProps {
+  file: string;
+  //not sure if you have to do this for things that are shared state
+}
 
-  return <Table array={getData("fileInt", false)} headers={false}></Table>;
+export function View_CSV({ file }: viewProps) {
+  // return whatever file you like
+  console.log(file);
+  return <Table array={getData(file, false)} headers={false}></Table>;
 }
