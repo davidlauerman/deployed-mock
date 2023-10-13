@@ -3,7 +3,6 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { ControlledInput } from "./ControlledInput";
 import { Line } from "./Line";
 import { Load_CSV } from "./load";
-import { Table } from "./Table";
 import { Search_CSV } from "./search";
 import { View_CSV } from "./view";
 

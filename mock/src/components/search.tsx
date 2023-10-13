@@ -9,5 +9,5 @@ interface searchProps {
 
 export function Search_CSV({ file, target, column }: searchProps) {
   // return whatever file you like
-  return <Table array={[getData(file, false)[0]]} headers={false}></Table>;
+  return <Table array={[getData(file)[0]]} headers={false}></Table>;
 }

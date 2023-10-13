@@ -9,5 +9,5 @@ interface viewProps {
 export function View_CSV({ file }: viewProps) {
   // return whatever file you like
   console.log(file);
-  return <Table array={getData(file, false)} headers={false}></Table>;
+  return <Table array={getData(file)} headers={false}></Table>;
 }
