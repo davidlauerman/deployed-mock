@@ -1,32 +1,52 @@
 import "../styles/main.css";
+import { useState } from "react";
 
-export function getData(file: string): string[][] {
-  if (file === "fileInt") {
-    // If input matches 'string1', return the first predetermined array.
-    return [
-      ["1", "2", "3"],
-      ["4", "5", "6"],
-      ["7", "8", "9"],
-    ];
-  } else if (file === "fileTxt") {
-    // If input matches 'string2', return the second predetermined array.
-    return [
-      ["Apple", "Banana", "Cherry"],
-      ["Dog", "Elephant", "Fox"],
-      ["A", "B", "C"],
-      ["1", "2", "34"],
-      ["lorem", "ipsum, dolor", "sit, amit!"],
-    ];
-  } else if (file === "fileRnd") {
-    // If input matches 'string3', return the third predetermined array.
-    return getRandomArray(5, 5);
+export function getData(file: string, load: Boolean): string[][] {
+  const [currFile, setCurrFile] = useState<string>("");
+
+  // this happens in load, stores the new loaded file and returns it
+  if (load) {
+    if (file === "fileInt" || file === "fileTxt" || file === "fileRnd") {
+      setCurrFile(file);
+      return [[file]];
+    } else {
+      return [["Wrong"]];
+    }
+  }
+
+  // if the file is already loaded, we are returning it
+  if (currFile === "fileInt") {
+    return Files.INT;
+  } else if (currFile === "fileTxt") {
+    return Files.TXT;
+  } else if (currFile === "fileRnd") {
+    return Files.RND;
   } else {
-    // If input doesn't match any of the predetermined strings, return null or perform another action.
+    // If input doesn't match any of the predetermined strings
     return [["Wrong"]];
   }
 }
 
-// // Function to generate a random 2D array of strings
+/**
+ * Static helper Class that holds the data
+ */
+class Files {
+  static RND: string[][] = getRandomArray(5, 5);
+  static TXT: string[][] = [
+    ["1", "2", "3"],
+    ["4", "5", "6"],
+    ["7", "8", "9"],
+  ];
+  static INT: string[][] = [
+    ["Apple", "Banana", "Cherry"],
+    ["Dog", "Elephant", "Fox"],
+    ["A", "B", "C"],
+    ["1", "2", "34"],
+    ["lorem", "ipsum, dolor", "sit, amit!"],
+  ];
+}
+
+// Function to generate a random 2D array of strings
 function getRandomArray(rows: number, cols: number): string[][] {
   const randomArray: string[][] = [];
   const characters =
@@ -48,11 +68,11 @@ function getRandomArray(rows: number, cols: number): string[][] {
 }
 
 // // Function to return a 2D array of integers
-// function getIntegers(): number[][] {
+// function getIntegers(): string[][] {
 //   return [
-//     [1, 2, 3],
-//     [4, 5, 6],
-//     [7, 8, 9],
+//     ["1", "2", "3"],
+//     ["4", "5", "6"],
+//     ["7", "8", "9"],
 //   ];
 // }
 
