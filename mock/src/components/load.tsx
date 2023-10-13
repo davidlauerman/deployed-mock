@@ -1,23 +1,21 @@
 import { Dispatch, SetStateAction } from "react";
-import { Line } from "./Line"
+import { Line } from "./Line";
 import { getData } from "./mockedJson";
 
 interface loadProps {
-    newFilepath: string;
-    //not sure if you have to do this for things that are shared state
-    setFilepath: Dispatch<SetStateAction<string>>;
+  newFilepath: string;
+  //not sure if you have to do this for things that are shared state
+  setFilepath: Dispatch<SetStateAction<string>>;
 }
 
-export function Load_CSV({newFilepath, setFilepath} : loadProps) {
-    let response = 'Filepath could not be found!'
-    //we need to check if we can load the data!
-    //this is an awkward way to see if we're right, we can return a string or a boolean or another type instead
-    //this also will fail if the first row/column of our dataset IS "Wrong"
-    if (getData(newFilepath)[0][0] !== "Wrong") {
-        setFilepath(newFilepath)
-        //this returns [object object] for some reason, but I'm not too worried because it works
-        response = "File " + {newFilepath} + " loaded!"
-    }
+export function Load_CSV({ newFilepath, setFilepath }: loadProps) {
+  let response = "Filepath could not be found!";
+  //we need to check if we can load the data!
+  if (getData(newFilepath, true)[0][0] !== "Wrong") {
+    setFilepath(newFilepath);
+    //this returns [object object] for some reason, but I'm not too worried because it works
+    response = "File " + { newFilepath } + " loaded!";
+  }
 
-    return <Line text={response}></Line>
+  return <Line text={response}></Line>;
 }
