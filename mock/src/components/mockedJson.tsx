@@ -1,32 +1,49 @@
 import "../styles/main.css";
+import { useState } from "react";
 
-export function getData(file: string): string[][] {
+export function getData(file: string, load: Boolean): string[][] {
+  // this happens in load, stores the new loaded file and returns it
+  // if (load) {
+  //   if (file === "fileInt" || file === "fileTxt" || file === "fileRnd") {
+  //     return [[file]];
+  //   } else {
+  //     return [["Wrong"]];
+  //   }
+  // }
+
+  // if the file is already loaded, we are returning it
   if (file === "fileInt") {
-    // If input matches 'string1', return the first predetermined array.
-    return [
-      ["1", "2", "3"],
-      ["4", "5", "6"],
-      ["7", "8", "9"],
-    ];
+    return Files.INT;
   } else if (file === "fileTxt") {
-    // If input matches 'string2', return the second predetermined array.
-    return [
-      ["Apple", "Banana", "Cherry"],
-      ["Dog", "Elephant", "Fox"],
-      ["A", "B", "C"],
-      ["1", "2", "34"],
-      ["lorem", "ipsum, dolor", "sit, amit!"],
-    ];
+    return Files.TXT;
   } else if (file === "fileRnd") {
-    // If input matches 'string3', return the third predetermined array.
-    return getRandomArray(5, 5);
+    return Files.RND;
   } else {
-    // If input doesn't match any of the predetermined strings, return null or perform another action.
+    // If input doesn't match any of the predetermined strings
     return [["Wrong"]];
   }
 }
 
-// // Function to generate a random 2D array of strings
+/**
+ * Static helper Class that holds the data
+ */
+class Files {
+  static RND: string[][] = getRandomArray(5, 5);
+  static TXT: string[][] = [
+    ["1", "2", "3"],
+    ["4", "5", "6"],
+    ["7", "8", "9"],
+  ];
+  static INT: string[][] = [
+    ["Apple", "Banana", "Cherry"],
+    ["Dog", "Elephant", "Fox"],
+    ["A", "B", "C"],
+    ["1", "2", "34"],
+    ["lorem", "ipsum, dolor", "sit, amit!"],
+  ];
+}
+
+// Function to generate a random 2D array of strings
 function getRandomArray(rows: number, cols: number): string[][] {
   const randomArray: string[][] = [];
   const characters =
@@ -48,11 +65,11 @@ function getRandomArray(rows: number, cols: number): string[][] {
 }
 
 // // Function to return a 2D array of integers
-// function getIntegers(): number[][] {
+// function getIntegers(): string[][] {
 //   return [
-//     [1, 2, 3],
-//     [4, 5, 6],
-//     [7, 8, 9],
+//     ["1", "2", "3"],
+//     ["4", "5", "6"],
+//     ["7", "8", "9"],
 //   ];
 // }
 
@@ -89,4 +106,37 @@ function getRandomArray(rows: number, cols: number): string[][] {
 //   } else {
 //     return <div> Wrong </div>;
 //   }
+// }
+
+// export function getData(file: string, load: Boolean): string[][] {
+//   // Define your predetermined 2D arrays
+//   const array1 = [
+//     ["Item 1", "Item 2", "Item 3"],
+//     ["Item 4", "Item 5", "Item 6"],
+//   ];
+
+//   const array2 = [
+//     ["A", "B", "C"],
+//     ["D", "E", "F"],
+//   ];
+
+//   const array3 = [
+//     ["One", "Two"],
+//     ["Three", "Four"],
+//   ];
+
+//   let selectedArray: string[][];
+
+//   // Use conditional logic to select the array based on the input string
+//   if (file === "string1") {
+//     selectedArray = array1;
+//   } else if (file === "string2") {
+//     selectedArray = array2;
+//   } else if (file === "string3") {
+//     selectedArray = array3;
+//   } else {
+//     selectedArray = [["Wrong"]]; // Default to an empty array if the input doesn't match any predetermined string
+//   }
+
+//   return selectedArray;
 // }

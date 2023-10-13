@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { ControlledInput } from "./ControlledInput";
 import { Line } from "./Line";
 import { Load_CSV } from "./load";
+import { Table } from "./Table";
 
 interface REPLInputProps {
   // TODO: Fill this with desired props... Maybe something to keep track of the submitted commands
@@ -59,7 +60,7 @@ export function REPLInput(props: REPLInputProps) {
 
   function responseParser (commandString: string) {
     const returnArray = commandString.split(" ")
-    return returnArray
+    return returnArray;
   }
 
   /**
