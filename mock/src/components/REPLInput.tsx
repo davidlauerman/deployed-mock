@@ -5,6 +5,7 @@ import { Line } from "./Line";
 import { Load_CSV } from "./load";
 import { Table } from "./Table";
 import { Search_CSV } from "./search";
+import { View_CSV } from "./view";
 
 interface REPLInputProps {
   // TODO: Fill this with desired props... Maybe something to keep track of the submitted commands
@@ -39,12 +40,15 @@ export function REPLInput(props: REPLInputProps) {
       response = <Line text="Changed mode!"></Line>;
     }
     //check for load function, get response
-    if (argArray[0] === "load") {
+    if (argArray[0] === "load_file") {
       response = (
         <Load_CSV newFilepath={argArray[1]} setFilepath={setFilepath} />
       );
     }
     //check for view function, get response
+    if (argArray[0] === "view") {
+      response = <View_CSV file={filepath} />;
+    }
     //check for search function, get response
     if (argArray[0] === "search") {
       response = (
