@@ -29,12 +29,12 @@ export function getData(file: string, load: Boolean): string[][] {
  */
 class Files {
   static RND: string[][] = getRandomArray(5, 5);
-  static TXT: string[][] = [
+  static INT: string[][] = [
     ["1", "2", "3"],
     ["4", "5", "6"],
     ["7", "8", "9"],
   ];
-  static INT: string[][] = [
+  static TXT: string[][] = [
     ["Apple", "Banana", "Cherry"],
     ["Dog", "Elephant", "Fox"],
     ["A", "B", "C"],
