@@ -14,7 +14,7 @@ export function Load_CSV({ newFilepath, setFilepath }: loadProps) {
   if (getData(newFilepath, true)[0][0] !== "Wrong") {
     setFilepath(newFilepath);
     //this returns [object object] for some reason, but I'm not too worried because it works
-    response = "File " + { newFilepath } + " loaded!";
+    response = "File " + newFilepath + " loaded!";
   }
 
   return <Line text={response}></Line>;
